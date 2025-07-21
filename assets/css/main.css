@@ -567,3 +567,28 @@ a:hover {
         gap: 0.5rem;
     }
 }
+
+/* Basic Image Support */
+.post-content img,
+.page-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin: 1.5rem 0;
+    display: block;
+}
+
+.post-content figure,
+.page-content figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.post-content figcaption,
+.page-content figcaption {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
