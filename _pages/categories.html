@@ -1,0 +1,58 @@
+---
+layout: page
+title: "Categories"
+permalink: /categories/
+description: "Browse posts by category"
+---
+
+<div class="categories-page">
+    {% assign categories = site.categories | sort %}
+    
+    {% if categories.size > 0 %}
+        <div class="categories-overview">
+            <h2>All Categories</h2>
+            <div class="categories-grid">
+                {% for category in categories %}
+                    <div class="category-card">
+                        <h3 class="category-name">
+                            <a href="#{{ category[0] | slugify }}">{{ category[0] }}</a>
+                        </h3>
+                        <span class="post-count">{{ category[1].size }} post{% if category[1].size != 1 %}s{% endif %}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="categories-content">
+            {% for category in categories %}
+                <section class="category-section" id="{{ category[0] | slugify }}">
+                    <h2 class="category-heading">{{ category[0] }}</h2>
+                    
+                    <div class="posts-list">
+                        {% for post in category[1] %}
+                            <article class="category-post">
+                                <div class="post-date">
+                                    <time datetime="{{ post.date | date_to_xmlschema }}">
+                                        {{ post.date | date: "%b %d, %Y" }}
+                                    </time>
+                                </div>
+                                <div class="post-info">
+                                    <h3 class="post-title">
+                                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                                    </h3>
+                                    {% if post.excerpt %}
+                                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+                                    {% endif %}
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-categories">
+            <p>No categories available yet. Posts will be organized here as they're published.</p>
+        </div>
+    {% endif %}
+</div>

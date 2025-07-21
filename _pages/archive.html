@@ -1,0 +1,49 @@
+---
+layout: page
+title: "Archive"
+permalink: /archive/
+description: "Browse all blog posts"
+---
+
+<div class="archive-page">
+    {% if site.posts.size > 0 %}
+        {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+        
+        {% for year in posts_by_year %}
+            <section class="archive-year">
+                <h2 class="year-heading">{{ year.name }}</h2>
+                
+                <div class="posts-list">
+                    {% for post in year.items %}
+                        <article class="archive-post">
+                            <div class="post-date">
+                                <time datetime="{{ post.date | date_to_xmlschema }}">
+                                    {{ post.date | date: "%b %d" }}
+                                </time>
+                            </div>
+                            <div class="post-info">
+                                <h3 class="post-title">
+                                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                                </h3>
+                                {% if post.categories.size > 0 %}
+                                    <div class="post-categories">
+                                        {% for category in post.categories %}
+                                            <span class="category">{{ category }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                {% if post.excerpt %}
+                                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                                {% endif %}
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    {% else %}
+        <div class="no-posts">
+            <p>No posts available yet. Check back soon!</p>
+        </div>
+    {% endif %}
+</div>

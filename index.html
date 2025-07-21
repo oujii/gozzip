@@ -1,0 +1,59 @@
+---
+layout: default
+title: "Home"
+---
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Welcome to {{ site.title }}</h1>
+            <p class="hero-description">{{ site.description }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="recent-posts">
+    <div class="container">
+        <h2>Latest Posts</h2>
+        
+        {% if site.posts.size > 0 %}
+            <div class="posts-grid">
+                {% for post in site.posts limit:6 %}
+                    <article class="post-card">
+                        <header class="post-card-header">
+                            <h3 class="post-card-title">
+                                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                            </h3>
+                            <div class="post-card-meta">
+                                <time datetime="{{ post.date | date_to_xmlschema }}">
+                                    {{ post.date | date: "%B %d, %Y" }}
+                                </time>
+                                {% if post.categories.size > 0 %}
+                                    <span class="post-card-category">{{ post.categories.first }}</span>
+                                {% endif %}
+                            </div>
+                        </header>
+                        
+                        {% if post.excerpt %}
+                            <div class="post-card-excerpt">
+                                {{ post.excerpt | strip_html | truncatewords: 30 }}
+                            </div>
+                        {% endif %}
+                        
+                        <footer class="post-card-footer">
+                            <a href="{{ post.url | relative_url }}" class="read-more">Read More →</a>
+                        </footer>
+                    </article>
+                {% endfor %}
+            </div>
+            
+            <div class="view-all">
+                <a href="/archive/" class="btn btn-primary">View All Posts</a>
+            </div>
+        {% else %}
+            <div class="no-posts">
+                <p>No posts yet. Check back soon for interesting content!</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
