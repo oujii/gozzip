@@ -7,6 +7,8 @@ tags: [blog, trending-topics, reddit]
 source_url: https://www.reddit.com/r/tylerthecreator/comments/1m5en9e/new_dont_tap_the_glass_release_megathread/
 ---
 
+![Blog Header](undefined)
+
 **Why "Don't Tap the Glass" By Tyler, the Creator Is Bringing Fans Closer Than Ever**
 
 *Or, why an internet megathread feels like group therapy — just with better music.*
