@@ -1,8 +1,8 @@
 # Site settings
 title: "Gozzip Blog"
 description: "A modern blog covering trending topics, culture, and interesting discussions from around the web"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://username.github.io" # the base hostname & protocol for your site
+baseurl: "/gozzip" # the subpath of your site, e.g. /blog
+url: "https://oujii.github.io" # the base hostname & protocol for your site
 author: "Gozzip"
 email: "contact@gozzip.com"
 
