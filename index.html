@@ -20,29 +20,52 @@ title: "Home"
             <div class="posts-grid">
                 {% for post in site.posts limit:6 %}
                     <article class="post-card">
-                        <header class="post-card-header">
-                            <h3 class="post-card-title">
-                                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                            </h3>
-                            <div class="post-card-meta">
-                                <time datetime="{{ post.date | date_to_xmlschema }}">
-                                    {{ post.date | date: "%B %d, %Y" }}
-                                </time>
-                                {% if post.categories.size > 0 %}
-                                    <span class="post-card-category">{{ post.categories.first }}</span>
-                                {% endif %}
+                        {% if post.image %}
+                            <div class="post-card-image">
+                                <img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" loading="lazy">
                             </div>
-                        </header>
-                        
-                        {% if post.excerpt %}
-                            <div class="post-card-excerpt">
-                                {{ post.excerpt | strip_html | truncatewords: 30 }}
-                            </div>
+                        {% else %}
+                            <div class="post-card-image"></div>
                         {% endif %}
                         
-                        <footer class="post-card-footer">
-                            <a href="{{ post.url | relative_url }}" class="read-more">Read More →</a>
-                        </footer>
+                        <div class="post-card-content">
+                            <header class="post-card-header">
+                                <h3 class="post-card-title">
+                                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                                </h3>
+                                <div class="post-card-meta">
+                                    <div class="post-meta-item">
+                                        <span>📅</span>
+                                        <time datetime="{{ post.date | date_to_xmlschema }}">
+                                            {{ post.date | date: "%b %d, %Y" }}
+                                        </time>
+                                    </div>
+                                    {% if post.author %}
+                                        <div class="post-meta-item">
+                                            <span>✍️</span>
+                                            <span class="post-author">{{ post.author }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if post.categories.size > 0 %}
+                                    <div class="post-card-categories">
+                                        {% for category in post.categories %}
+                                            <span class="post-card-category">{{ category }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </header>
+                            
+                            {% if post.excerpt %}
+                                <div class="post-card-excerpt">
+                                    {{ post.excerpt | strip_html | truncatewords: 25 }}
+                                </div>
+                            {% endif %}
+                            
+                            <footer class="post-card-footer">
+                                <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
+                            </footer>
+                        </div>
                     </article>
                 {% endfor %}
             </div>
